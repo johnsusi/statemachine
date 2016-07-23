@@ -52,7 +52,7 @@ before_install:
 script:
   - mkdir build
   - cd build
-  - if [ -z "$_CC" ]; then export CC=$_CC ; fi
-  - if [ -z "$_CXX" ]; then export CXX=$_CXX ; fi
+  - export CC=$_CC
+  - export CXX=$_CXX
   - cmake .. $CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
   - cmake --build . --config Release
