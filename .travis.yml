@@ -42,6 +42,8 @@ matrix:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl -sL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | tar xvz ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=$PWD/cmake-3.5.2-Linux-x86_64/bin:$PATH ; fi
 
 script:
   - mkdir build
