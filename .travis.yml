@@ -33,6 +33,21 @@ matrix:
       - CXX=clang++-3.8
       - CMAKE_ARGS=
   - os: osx
+    osx_image: xcode6.4
+    compiler: clang
+    env:
+      - CC=clang
+      - CXX=clang++
+      - CMAKE_ARGS=
+  - os: osx
+    osx_image: xcode7.3
+    compiler: clang
+    env:
+      - CC=clang
+      - CXX=clang++
+      - CMAKE_ARGS=
+  - os: osx
+    osx_image: xcode8
     compiler: clang
     env:
       - CC=clang
@@ -50,5 +65,5 @@ script:
   - cd build
   - export CC=$CC
   - export CXX=$CXX
-  - cmake .. $CMAKE_ARGS
+  - cmake .. $CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
   - cmake --build . --config Release
