@@ -19,7 +19,7 @@ public:
 
   template <typename Event, typename... Ts> void process_event(Ts... args)
   {
-    process_event<Event>({std::forward<Ts>(args)...});
+    process_event(Event{std::forward<Ts>(args)...});
   }
 
   struct invoke_helper {
@@ -130,7 +130,7 @@ private:
 
   std::tuple<States..., Index> states;
 
-  constexpr CRTP* crtp() noexcept { return (CRTP*)(this); }
+  CRTP* crtp() noexcept { return (CRTP*)(this); }
 
 };
 
