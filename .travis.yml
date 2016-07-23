@@ -15,6 +15,7 @@ matrix:
     env:
       - CC=gcc-5
       - CXX=g++-5
+      - CMAKE_ARGS=
   - os: linux
     compiler: clang
     addons:
@@ -30,9 +31,13 @@ matrix:
     env:
       - CC=clang-3.8
       - CXX=clang++-3.8
+      - CMAKE_ARGS=
   - os: osx
     compiler: clang
     env:
+      - CC=clang
+      - CXX=clang++
+      - CMAKE_ARGS=-GNinja
 
 before install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
@@ -41,5 +46,7 @@ before install:
 script:
   - mkdir build
   - cd build
-  - cmake ..
+  - export CC=$CC
+  - export CXX=$CXX
+  - cmake .. $CMAKE_ARGS
   - cmake --build . --config Release
