@@ -47,6 +47,10 @@ script:
   - echo $PATH
   - export PATH=$PWD/bin:$PATH
   - export LD_LIBRARY_PATH=$PWD/lib
+  - echo ../tools/$TOOLCHAIN.cmake
+  - echo $CC
+  - echo $CXX
+  - clang++ --version
   - mkdir build
   - cd build
   - cmake .. -DCMAKE_TOOLCHAIN_FILE=../tools/$TOOLCHAIN.cmake
