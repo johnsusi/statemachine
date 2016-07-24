@@ -12,29 +12,28 @@ matrix:
         - ninja-build
         - g++-6
     env: PLATFORM=linux TOOLCHAIN=linux-gcc-libstdc++
-  # - os: linux
+  - os: linux
+    compiler: clang
+    # addons:
+    #   apt:
+    #     sources:
+    #     - llvm-toolchain-precise-3.8
+    #     - ubuntu-toolchain-r-test
+    #     packages:
+    #     - clang-3.8
+    env: PLATFORM=linux TOOLCHAIN=linux-clang-libc++
+  # - os: osx
+  #   osx_image: xcode6.4
   #   compiler: clang
-  #   addons:
-  #     apt:
-  #       sources:
-  #       - llvm-toolchain-precise-3.8
-  #       - ubuntu-toolchain-r-test
-  #       packages:
-  #       - clang-3.8
-  #   env:
-  #     - TOOLCHAIN=linux-clang-libc++
-  - os: osx
-    osx_image: xcode6.4
-    compiler: clang
-    env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
-  - os: osx
-    osx_image: xcode7.3
-    compiler: clang
-    env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
-  - os: osx
-    osx_image: xcode8
-    compiler: clang
-    env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
+  #   env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
+  # - os: osx
+  #   osx_image: xcode7.3
+  #   compiler: clang
+  #   env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
+  # - os: osx
+  #   osx_image: xcode8
+  #   compiler: clang
+  #   env: PLATFORM=darwin TOOLCHAIN=darwin-clang-libc++
 
 before_install:
   - PLATFORM_COMPILER=$PLATFORM-$COMPILER
