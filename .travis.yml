@@ -42,6 +42,9 @@ before_install:
   - if [ -f tools/$PLATFORM_COMPILER.sh ]; then . ./tools/$PLATFORM_COMPILER.sh ; fi
 
 script:
+  - echo $PATH
+  - export PATH=$PWD/bin:$PATH
+  - export LD_LIBRARY_PATH=$PWD/lib
   - mkdir build
   - cd build
   - cmake .. -DCMAKE_TOOLCHAIN_FILE=../tools/$TOOLCHAIN.cmake
