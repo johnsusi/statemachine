@@ -43,6 +43,7 @@ before_install:
 
 script:
   - ls -l
+  - cmake --version
   - echo $PATH
   - export PATH=$PWD/bin:$PATH
   - export LD_LIBRARY_PATH=$PWD/lib
