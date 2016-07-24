@@ -5,7 +5,8 @@
 
 struct Idle {};
 struct Running {};
-struct Start { int value = 0; };
+// struct Start { int value = 0; }; // VS2015 missing NSDMIs for aggregates
+struct Start { int value; Start(int value = 0) : value(value) {} };
 struct Stop {};
 struct Pause {};
 struct Resume {};
@@ -53,6 +54,7 @@ TEST_CASE( "Basic tests" ) {
   REQUIRE(m == 2);
   m.process_event<Stop>();
   REQUIRE(m == 2);
+
   m.process_event<Start>(10);
   REQUIRE(m == 10);
   m.process_event<Stop>();

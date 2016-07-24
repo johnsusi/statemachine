@@ -9,7 +9,7 @@ class StateMachine
 {
 public:
 
-  template <typename Event> void process_event(Event&& event = {})
+  template <typename Event> void process_event(Event&& event)
   {
     auto& index = std::get<Index>(states);
     find_type_by_index(index.value, states, [&](auto&& s1) {
@@ -17,9 +17,9 @@ public:
     });
   }
 
-  template <typename Event, typename... Ts> void process_event(Ts... args)
+  template <typename Event, typename... Ts> void process_event(Ts&&... args)
   {
-    process_event(Event{std::forward<Ts>(args)...});
+    process_event<Event>({std::forward<Ts>(args)...});
   }
 
   struct invoke_helper {
