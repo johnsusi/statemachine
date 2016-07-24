@@ -1,5 +1,5 @@
-#ifndef __STATEMACHINE_H
-#define __STATEMACHINE_H
+#ifndef STATEMACHINE_H
+#define STATEMACHINE_H
 
 #include <stdexcept>
 #include <tuple>
@@ -24,7 +24,9 @@ public:
 
   struct invoke_helper {
     template <typename F, typename... Ts>
-    static auto invoke_if(F&& f, Ts&&... args) -> decltype( f(std::forward<Ts>(args)...) )
+
+    static auto invoke_if(F&& f, Ts&&... args) ->
+      typename std::enable_if<true, decltype( f(std::forward<Ts>(args)...))>::type
     {
       return f(std::forward<Ts>(args)...);
     }
@@ -112,7 +114,7 @@ private:
   struct find_type_by_index_helper<N, N>
   {
     template <typename Tuple, typename F>
-    static void invoke(std::size_t index, Tuple&& values, F callback)
+    static void invoke(std::size_t, Tuple&&, F)
     {
     }
   };
@@ -130,7 +132,7 @@ private:
 
   std::tuple<States..., Index> states;
 
-  CRTP* crtp() noexcept { return (CRTP*)(this); }
+  CRTP* crtp() noexcept { return static_cast<CRTP*>(this); }
 
 };
 
